@@ -61,9 +61,10 @@ def plot_cost_contour(x, y, w_range=(100, 300, 50), b_range=(0, 200, 50)):
     W, B = np.meshgrid(w_vals, b_vals)
     costs = np.zeros_like(W, dtype=float)
     
-    for i in range(W.shape[0]):
-        for j in range(W.shape[1]):
-            costs[i, j] = compute_cost(x, y, W[i, j], B[i, j])
+    for w, b in zip(W.ravel(), B.ravel()):
+        costs[W == w, B == b] = compute_cost(x, y, w, b)
+    
+    costs = costs.reshape(W.shape)
     
     plt.figure()
     contour = plt.contour(W, B, costs, levels=20, cmap='viridis')
