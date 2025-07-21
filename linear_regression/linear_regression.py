@@ -84,7 +84,7 @@ if has_lab_utils:
     updater = plt_update_onclick(fig, ax, x_train_2, y_train_2, dyn_items)
     
     soup_bowl()
-else:
+else: 
     # Fallback plots
     plot_data(x_train_1, y_train_1, w=200, b=100, title="House Prices (Small Dataset)")
     plot_data(x_train_2, y_train_2, w=200, b=100, title="House Prices (Larger Dataset)")
