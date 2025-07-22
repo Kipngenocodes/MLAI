@@ -53,6 +53,7 @@ def plot_data(x, y, w=200, b=100, title="House Prices vs Size"):
     plt.title(title)
     plt.legend()
     plt.grid(True)
+    
 
 # Fallback cost function visualization (contour plot)
 def plot_cost_contour(x, y, w_range=(100, 300, 50), b_range=(0, 200, 50)):
