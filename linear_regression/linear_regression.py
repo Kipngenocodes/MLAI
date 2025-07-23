@@ -51,7 +51,7 @@ def plot_data(x, y, w=200, b=100, title="House Prices vs Size"):
     plt.xlabel('Size (1000 sq ft)')
     plt.ylabel('Price (1000s of $)')
     plt.title(title)
-    plt.legend()
+    plt.legend()   
     plt.grid(True)
     
 
