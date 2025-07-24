@@ -210,6 +210,7 @@ def demonstrate_vectorization():
                 batch_result[i] = result
             results.append(batch_result)
         # Concatenate results from all batches
+        
         return np.concatenate(results)
     
     def process_batches_vectorized(X, batch_size, weights):
@@ -274,12 +275,7 @@ def demonstrate_vectorization():
     print(f"Speedup: {time_loops/time_vectorized:.1f}x faster\n")
     
     print("=== KEY TAKEAWAYS ===")
-    print("1. Vectorization leverages optimized C/Fortran libraries (BLAS, LAPACK)")
-    print("2. Eliminates Python loops, reducing interpretation overhead")
-    print("3. Enables SIMD (Single Instruction, Multiple Data) operations")
-    print("4. Better memory access patterns and cache utilization")
-    print("5. Essential for scaling ML algorithms to large datasets")
-    print("6. NumPy broadcasting allows element-wise operations on different shapes")
+
 
 if __name__ == "__main__":
     demonstrate_vectorization()
