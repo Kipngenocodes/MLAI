@@ -209,7 +209,7 @@ def demonstrate_vectorization():
                     result += batch[i, j] * weights[j]
                 batch_result[i] = result
             results.append(batch_result)
-        
+        # Concatenate results from all batches
         return np.concatenate(results)
     
     def process_batches_vectorized(X, batch_size, weights):
