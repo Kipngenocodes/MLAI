@@ -261,7 +261,7 @@ def demonstrate_vectorization():
         means = np.mean(X, axis=0)  # Shape: (n_features,)
         stds = np.std(X, axis=0)    # Shape: (n_features,)
         return (X - means) / stds   # Broadcasting!
-    
+    # working to parametization of the function
     start = time.time()
     norm_loops = normalize_loops(X[:1000])
     time_loops = time.time() - start
