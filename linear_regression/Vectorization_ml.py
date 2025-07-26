@@ -247,6 +247,7 @@ def demonstrate_vectorization():
     
     # Normalize features by subtracting mean and dividing by std
     def normalize_loops(X):
+        # Make changes 
         normalized = np.zeros_like(X)
         for j in range(X.shape[1]):  # For each feature
             mean_j = np.sum(X[:, j]) / X.shape[0]
@@ -255,7 +256,7 @@ def demonstrate_vectorization():
             
             for i in range(X.shape[0]):  # For each sample
                 normalized[i, j] = (X[i, j] - mean_j) / std_j
-        return normalized
+        return normalized 
     
     def normalize_vectorized(X):
         means = np.mean(X, axis=0)  # Shape: (n_features,)
