@@ -13,3 +13,8 @@ def min_max_norm(dataset):
 
 normalized_minmax = min_max_norm(x_array)
 print("Min-Max normalized:", normalized_minmax)
+
+# --- Standardization ---
+scaler = preprocessing.StandardScaler()
+normalized_standard = scaler.fit_transform(x_array.reshape(-1, 1))
+print("Standardized:", normalized_standard) 
