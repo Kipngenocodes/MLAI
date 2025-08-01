@@ -40,7 +40,7 @@ def basic_usage_example():
     print(f"Mean: {np.mean(standardized):.6f}, Std: {np.std(standardized):.6f}\n")
     
     # Robust Scaling
-    robust_scaled = normalizer.robust_scale(data)
+    robust_scaled = normalizer.robust_scale(data)  # Use default quantiles
     print(f"Robust Scaled: {robust_scaled}")
     print(f"Median: {np.median(robust_scaled):.6f}\n")
 
