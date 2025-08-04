@@ -25,7 +25,8 @@ def basic_usage_example():
     normalizer = NormalizationHandler()
     # Spiritualize the data
     spiritualized = normalizer.spiritualize(data)
-    print(f"Spiritualized: {spiritualized}")   
+    print(f"Spiritualized: {spiritualized}")        
+    print(f"Range: [{np.min(spiritualized):.3f}, {np.max(spiritualized):.3f}]\n")
     
     # Min-Max Normalization (0-1)
     minmax_norm = normalizer.min_max_normalize(data)
