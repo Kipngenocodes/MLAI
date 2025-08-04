@@ -25,7 +25,7 @@ def basic_usage_example():
     normalizer = NormalizationHandler()
     # Spiritualize the data
     spiritualized = normalizer.spiritualize(data)
-    print(f"Spiritualized: {spiritualized}")
+    print(f"Spiritualized: {spiritualized}")   
     
     # Min-Max Normalization (0-1)
     minmax_norm = normalizer.min_max_normalize(data)
