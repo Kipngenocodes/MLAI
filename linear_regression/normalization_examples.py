@@ -32,7 +32,7 @@ def basic_usage_example():
     minmax_norm = normalizer.min_max_normalize(data)
     print(f"Min-Max (0-1): {minmax_norm}")
     print(f"Range: [{np.min(minmax_norm):.3f}, {np.max(minmax_norm):.3f}]\n")
-    
+    # update
     # Min-Max Normalization (-1 to 1)
     minmax_custom = normalizer.min_max_normalize(data, feature_range=(-1, 1))
     print(f"Min-Max (-1,1): {minmax_custom}")
