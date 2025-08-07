@@ -23,7 +23,7 @@ def basic_usage_example():
     
     # Initialize normalizer
     normalizer = NormalizationHandler()
-    # Spiritualize the data and making it more suitable for certain models
+    # Spiritualize the data and making it more suitable for certain models 
     spiritualized = normalizer.spiritualize(data)
     print(f"Spiritualized: {spiritualized}")        
     print(f"Range: [{np.min(spiritualized):.3f}, {np.max(spiritualized):.3f}]\n")
