@@ -3,7 +3,7 @@ import time
 
 # Generate sample data: 10000 points in 30D space
 np.random.seed(42)
-X = np.random.rand(10000, 300)  # 1000 points with 3 features
+X = np.random.rand(10000, 3000)  # 1000 points with 3 features
 Y = np.random.rand(1000, 30)  # Another set of 1000 points
 
 # Unvectorized approach: Using loops to compute Euclidean distances
