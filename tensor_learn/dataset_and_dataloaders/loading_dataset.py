@@ -48,5 +48,5 @@ for i in range(1, cols * rows + 1):
     figure.add_subplot(rows, cols, i)
     plt.title(labels_map[label])
     plt.axis("off")
-    plt.imshow(img.squeeze(), cmap="gray")
+    plt.imshow(img.squeeze(), cmap="Accent")
 plt.show()
