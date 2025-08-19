@@ -1,5 +1,6 @@
 # Standard numpy-like indexing and slicing:
 import  torch
+import numpy as np
 
 
 tensor = torch.ones(4, 4)
@@ -51,4 +52,16 @@ t = torch.ones(5)
 print(f"t: {t}")
 n = t.numpy()
 print(f"n: {n}")
+
+
+# A change in tensor reflects in numpy Array
+t.add_(1)
+print(f"t: {t}")
+print(f"n: {n}")
+
+# Converting the Numpy Array to Tensor
+n = np.ones(5)
+t = torch.from_numpy(n)
+
+
 
