@@ -28,4 +28,4 @@ class NeuralNetwork(nn.Module):
     
 # We create an instance of NeuralNetwork, and move it to the device, and print its structure.
 model = NeuralNetwork().to(device)
-print(model)
+print(model) 
