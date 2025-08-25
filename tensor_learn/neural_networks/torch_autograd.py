@@ -15,3 +15,15 @@ print(f"Gradient function for loss = {loss.grad_fn}")
 loss.backward()
 print(w.grad)
 print(b.grad)
+
+# Disabling gradient tracking
+with torch.no_grad():
+    z = torch.matmul(x, w)+b
+    loss = torch.nn.functional.binary_cross_entropy_with_logits(z, y) 
+    print(f"Gradient function for z = {z.grad_fn}")
+    print(f"Gradient function for loss = {loss.grad_fn}")
+
+
+# Using detach() method on tensor
+z = z.detach()
+print(f"Gradient function for z = {z.grad_fn}")
