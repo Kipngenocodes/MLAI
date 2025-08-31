@@ -7,7 +7,7 @@ import tensorflow as tf
 
 from tensorflow.keras import layers
 from tensorflow.keras import losses
-from tensorflow.keras import preprocessing
+from tensorflow.keras import preprocessing 
 # Downloading the Dataset 
 url = "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 
