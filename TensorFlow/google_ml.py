@@ -194,3 +194,8 @@ def show_predictions(output):
     print(banner)
     print(output)
     return
+
+# Make predictions
+
+output = predict_fare(experiment_3.model, training_df, experiment_3.settings.input_features, 'FARE')
+show_predictions(output)
