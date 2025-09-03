@@ -188,7 +188,7 @@ def predict_fare(model, df, features, label, batch_size=50):
     output_df = pd.DataFrame(data)
     return output_df
 
-def show_predictions(output):
+def show_predictions(output): 
     header = "-" * 80
     banner = header + "\n" + "|" + "PREDICTIONS".center(78) + "|" + "\n" + header
     print(banner)
