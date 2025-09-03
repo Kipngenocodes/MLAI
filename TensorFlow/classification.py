@@ -67,3 +67,25 @@ for x_axis_data, y_axis_data in [
     ('Eccentricity', 'Major_Axis_Length'),
 ]:
     px.scatter(rice_dataset, x=x_axis_data, y=y_axis_data, color='Class').show()
+
+# Plotting three feature distributions
+for feature in ['Area', 'Perimeter', 'Eccentricity']:
+    px.histogram(rice_dataset, x=feature, color='Class', barmode='overlay').show()
+    
+# Normalization of data
+# Calculate the Z-scores of each numerical column in the raw data and write
+# them into a new DataFrame named df_norm.
+
+feature_mean = rice_dataset.mean(numeric_only=True)
+feature_std = rice_dataset.std(numeric_only=True)
+numerical_features = rice_dataset.select_dtypes('number').columns
+normalized_dataset = (
+    rice_dataset[numerical_features] - feature_mean
+) / feature_std
+
+# Copy the class to the new dataframe
+normalized_dataset['Class'] = rice_dataset['Class']
+
+# Examine some of the values of the normalized training set. Notice that most
+# Z-scores fall between -2 and +2.
+normalized_dataset.head()
