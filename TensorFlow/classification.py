@@ -313,7 +313,7 @@ validation_metrics_all_features = experiment_all_features.evaluate(
 compare_train_validation(experiment_all_features, validation_metrics_all_features)
 
 
-# Comparing the two models
+# Comparing the two models as which perfoms better
 ml_edu.results.compare_experiment([experiment, experiment_all_features],
                                     ['accuracy', 'auc'],
                                     validation_features, validation_labels)
