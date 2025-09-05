@@ -27,7 +27,7 @@ def detect_outliers(df, column):
     outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)][column]
     return len(outliers)
 
-# Analyze potential outliers
+# Analyze potential outliers of the game features
 columns_to_check = ['total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
 print("\nOutlier Analysis:")
 for col in columns_to_check:
