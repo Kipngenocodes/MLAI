@@ -31,7 +31,7 @@ def detect_outliers(df, column):
 columns_to_check = ['total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
 print("\nOutlier Analysis:")
 for col in columns_to_check:
-    num_outliers = detect_outliers(training_df, col)
+    num_outliers = detect_outliers(training_df, col)  
     skewness = skew(training_df[col].dropna())
     print(f"{col}: {num_outliers} outliers, skewness = {skewness:.1f}")
 
