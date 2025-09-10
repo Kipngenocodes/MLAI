@@ -1,29 +1,34 @@
-import matplotlib.pyplot as plt
 import os
-import re
-import shutil
-import string
+import numpy as np
+
 import tensorflow as tf
+import tensorflow_hub as hub
+import tensorflow_datasets as tfds
+import tf_keras  # Add this import
 
-from tensorflow.keras import layers
-from tensorflow.keras import losses
-from tensorflow.keras import preprocessing 
-# Downloading the Dataset 
-url = "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
+# Downloading the IMDB dataset
+# Split the train set into 60% training and 40% validation to end up with 15,000 examples 
+# for training, 10,000 for validation and 25,000 for testing
+train_data, validation_data, test_data = tfds.load(
+    name="imdb_reviews",
+    split=('train[:60%]', 'train[60%:]', 'test'),
+    as_supervised=True)
 
-dataset = tf.keras.utils.get_file("aclImdb_v1", url,
-                                    untar=True, cache_dir='.',
-                                    cache_subdir='')
+# Explore the data
+train_examples_batch, train_labels_batch = next(iter(train_data.batch(10)))
+print(train_examples_batch)
 
-dataset_dir = os.path.join(os.path.dirname(dataset), 'aclImdb')
+# Building the model
+# Using a pre-trained text embedding model from TensorFlow Hub
+embedding = "https://tfhub.dev/google/nnlm-en-dim50/2"
+hub_layer = hub.KerasLayer(embedding, input_shape=[],
+                        dtype=tf.string, trainable=True)
+hub_layer(train_examples_batch[:3])
 
-os.listdir(dataset_dir)
+# Building the model with tf_keras
+model = tf_keras.Sequential()  # Use tf_keras instead of tf.keras
+model.add(hub_layer)           # This should now work
+model.add(tf_keras.layers.Dense(16, activation='relu'))
+model.add(tf_keras.layers.Dense(1))  # For binary classification (sigmoid is implied later)
 
-train_dir = os.path.join(dataset_dir, 'train')
-os.listdir(train_dir)
-
-# Checking on one review.
-
-sample_file = os.path.join(train_dir, 'pos/1181_9.txt')
-with open(sample_file) as f:
-    print(f.read())
+model.summary()
