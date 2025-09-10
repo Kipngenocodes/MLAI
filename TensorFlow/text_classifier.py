@@ -32,3 +32,21 @@ model.add(tf_keras.layers.Dense(16, activation='relu'))
 model.add(tf_keras.layers.Dense(1))  # For binary classification (sigmoid is implied later)
 
 model.summary()
+
+# Compiling the model
+# loss function and optimizer
+model.compile(optimizer='adam',
+                loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+                metrics=['accuracy'])
+
+# Train the model
+history = model.fit(train_data.shuffle(10000).batch(512),
+                    epochs=10,
+                    validation_data=validation_data.batch(512),
+                    verbose=1)
+
+
+# Evaluate the model
+results = model.evaluate(test_data.batch(512), verbose=2)
+for name, value in zip(model.metrics_names, results):
+    print("%s: %.3f" % (name, value))
