@@ -14,7 +14,7 @@ train_data, validation_data, test_data = tfds.load(
     split=('train[:60%]', 'train[60%:]', 'test'),
     as_supervised=True)
 
-# Explore the data
+# Explore the data needed for training
 train_examples_batch, train_labels_batch = next(iter(train_data.batch(10)))
 print(train_examples_batch)
 
