@@ -18,7 +18,7 @@ train_data, validation_data, test_data = tfds.load(
 train_examples_batch, train_labels_batch = next(iter(train_data.batch(10)))
 print(train_examples_batch)
 
-# Building the model   
+# Building the model  
 # Using a pre-trained text embedding model from TensorFlow Hub
 embedding = "https://tfhub.dev/google/nnlm-en-dim50/2"
 hub_layer = hub.KerasLayer(embedding, input_shape=[],
