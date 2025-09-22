@@ -31,7 +31,7 @@ model.add(hub_layer)           # This should now work
 model.add(tf_keras.layers.Dense(16, activation='relu'))
 model.add(tf_keras.layers.Dense(1))  # For binary classification (sigmoid is implied later)
 
-model.summary()
+model.summary()  # Print model summary
 
 # Compiling the model
 # loss function and optimizer
