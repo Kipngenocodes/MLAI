@@ -3,8 +3,19 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_datasets as tfds
 
+# Custom Keras layer to wrap hub.KerasLayer
+class HubLayerWrapper(tf.keras.layers.Layer):
+    def __init__(self, hub_url, **kwargs):
+        super(HubLayerWrapper, self).__init__(**kwargs)
+        self.hub_layer = hub.KerasLayer(hub_url, input_shape=(), dtype=tf.string, trainable=True)
+    
+    def call(self, inputs):
+        return self.hub_layer(inputs)
+
 # Set TensorFlow Hub cache directory
-os.environ["TFHUB_CACHE_DIR"] = "C:/Users/p1/tfhub_cache"
+cache_dir = "C:/Users/p1/tfhub_cache"
+os.makedirs(cache_dir, exist_ok=True)  # Ensure cache directory exists
+os.environ["TFHUB_CACHE_DIR"] = cache_dir
 
 # Print versions for debugging
 print(f"TensorFlow Version: {tf.__version__}")
@@ -30,7 +41,7 @@ print("Labels:\n", train_labels_batch.numpy())
 # Load pre-trained embedding layer
 embedding_url = "https://tfhub.dev/google/nnlm-en-dim50/2"
 try:
-    hub_layer = hub.KerasLayer(embedding_url, input_shape=[], dtype=tf.string, trainable=True)
+    hub_layer = HubLayerWrapper(embedding_url)
     print("Embedding layer loaded successfully")
 except Exception as e:
     print(f"Error loading embedding model: {e}")
@@ -44,7 +55,7 @@ except Exception as e:
     print(f"Error testing embedding layer: {e}")
     raise
 
-# Build the model using Functional API to avoid compatibility issues with Sequential
+# Build the model using Functional API
 inputs = tf.keras.Input(shape=(), dtype=tf.string)
 x = hub_layer(inputs)
 x = tf.keras.layers.Dense(16, activation='relu')(x)
@@ -62,12 +73,20 @@ model.compile(
     metrics=['accuracy']
 )
 
+# Define early stopping callback
+early_stopping = tf.keras.callbacks.EarlyStopping(
+    monitor='val_loss',
+    patience=3,
+    restore_best_weights=True
+)
+
 # Train the model
 try:
     history = model.fit(
         train_data.shuffle(10000).batch(512),
         epochs=10,
         validation_data=validation_data.batch(512),
+        callbacks=[early_stopping],
         verbose=1
     )
     print("Training completed successfully")
@@ -89,7 +108,11 @@ except Exception as e:
 
 # Save the model
 try:
-    model.save('C:/Users/p1/models/imdb_model')
+    save_dir = 'C:/Users/p1/models/imdb_model.keras'  # Added .keras extension
+    os.makedirs(os.path.dirname(save_dir), exist_ok=True)  # Ensure save directory exists
+    model.save(save_dir)  # Save in native Keras format
+    # For SavedModel format (e.g., for TFLite/TFServing), use:
+    # model.export('C:/Users/p1/models/imdb_model_savedmodel')
     print("Model saved successfully")
 except Exception as e:
     print(f"Error saving model: {e}")
