@@ -44,13 +44,13 @@ except Exception as e:
     print(f"Error testing embedding layer: {e}")
     raise
 
-# Build the model
-model = tf.keras.Sequential([
-    hub_layer,
-    tf.keras.layers.Dense(16, activation='relu'),
-    tf.keras.layers.Dropout(0.2),
-    tf.keras.layers.Dense(1)  # Logits output for binary classification
-])
+# Build the model using Functional API to avoid compatibility issues with Sequential
+inputs = tf.keras.Input(shape=(), dtype=tf.string)
+x = hub_layer(inputs)
+x = tf.keras.layers.Dense(16, activation='relu')(x)
+x = tf.keras.layers.Dropout(0.2)(x)
+outputs = tf.keras.layers.Dense(1)(x)  # Logits output for binary classification
+model = tf.keras.Model(inputs=inputs, outputs=outputs)
 
 # Print model summary
 model.summary()
